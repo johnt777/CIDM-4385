@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="unitConverter">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Unit Converter</title>
+        
+        <link href="bootstrap-darkly.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="site.css" />
+
+    <!-- Loading Flat UI -->
+    <!--<link href="theme/css/flat-ui.css" rel="stylesheet">
+    
+    <link href="theme/css/style.css" rel="stylesheet">
+
+    <link href="theme/css/style.complete.css" rel="stylesheet">-->
+       
+      
+        <script data-require="angular.js@1.3.x" src="https://code.angularjs.org/1.3.17/angular.js" data-semver="1.3.17"></script>
+        <script src="https://rawgit.com/MikeMcl/decimal.js/master/decimal.min.js"></script>
+        <script src="https://rawgit.com/alexandernst/angular-unit-converter/master/src/angular-unit-converter.js"></script>
+        <script src="app.js"></script>
+    </head>
+
+    <body ng-controller="MainCtrl">
+        <label>Model value: {{ value }}</label>
+        
+        <br /><br />
+        
+        <label>
+            Convert from
+		    <select ng-init="convertFrom = convertFrom || options[1].value" ng-model="convertFrom" ng-options="opt.value as opt.name for opt in options"></select>
+		    to
+		    <select ng-init="convertTo = convertTo || options[0].value" ng-model="convertTo" ng-options="opt.value as opt.name for opt in options"></select>
+        </label>
+        
+        <br /><br />
+        
+		<label for="e" class="">
+		    Converted value
+		    <input id="e" ng-model="value" type="text" placeholder="0" angular-unit-converter convert-from="{{ convertFrom }}" convert-to="{{ convertTo }}" />
+		</label>
+		
+		<br /><br />
+		
+		<p>
+		    The calculations are a backwards so if convert feet to miles, you will see the amount 
+		    of feet in the moded value and the amount miles in the converted value in which
+		    you entered.
+		</p>
+		
+		
+		<script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script src="js/jquery.nivo.slider.pack.js"></script>
+    <script src="js/application.js"></script>
+	<script src="js/over.js"></script>
+	<script>
+	
+	$(function(){
+		
+		if( $('#nivoSlider').size() > 0 ) {
+		
+	    	$('#nivoSlider').nivoSlider({
+	    		effect: 'random',
+				pauseTime: 5000
+	    	});
+		
+		}
+		
+	})
+	</script>
+    </body>
+
+</html>

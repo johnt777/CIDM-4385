@@ -1,0 +1,91 @@
+<p><img src="{{wsc.google_static_maps_url}}" /></p>
+<div class="panel panel-primary">
+     <div class="panel-heading">
+    <h3 class="panel-title">Current Weather Report</h3>
+  </div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <tr>
+                <td>
+                    <span class="label label-info">Report Time:</span>
+                </td>
+                <td>
+                    <span class="badge">{{wsc.observation_time | date : 'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-info">Temperature:</span>
+                </td>
+                <td>
+                    <span class="badge">{{wsc.temperature}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-info">Dewpoint:</span>
+                </td>
+                <td>
+                    <span class="badge">{{wsc.dewpoint}}</span>
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    <span class="label label-info">Chance of Rain:</span>
+                </td>
+                <td>
+                    <span class="badge">{{wsc.precipProbability}}</span>
+                </td>
+            </tr>
+              <tr>
+                <td>
+                    <span class="label label-info">Humidity:</span>
+                </td>
+                <td>
+                    <span class="badge">{{wsc.humidity}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-info">Wind:</span>
+                </td>
+                <td>
+                    <span class="badge">{{wsc.windBearing}} at {{wsc.windSpeed}}</span>
+                </td>
+            </tr>            
+            <tr>
+                <td>
+                    <span class="label label-info">Current Conditions:</span>
+                </td>
+                <td>
+                    <!-- just because I'm showing the summary here DOES NOT
+                         mean that I want you do NOT do the image thing -->
+                    <span class="badge">{{wsc.summary}}</span>
+                    <!-- This is where I use the project below's own custom directive-->
+                    <!-- https://github.com/projectweekend/angular-skycons -->
+                    <!--<skycon icon="wsc.ds_icon" size="128"></skycon>-->
+                </td>
+                <td>{{ wsc.icon }}</td>
+            </tr>
+            
+        </table>
+        <!--<p><span class="label label-info">Report Time:</span> <span class="badge">{{wsc.observation_time}}</span></p>
+        <p><span class="label label-info">Temperature:</span> <span class="badge">{{wsc.temperature_string}}</span></p>
+        <p><span class="label label-info">Dewpoint:</span> <span class="badge">{{wsc.dewpoint_string}}</span></p>
+        <p><span class="label label-info">Wind:</span> <span class="badge">{{wsc.wind_string}}</span></p>
+        <p><span class="label label-info">Current Conditions:</span> <img src="{{wsc.icon_url}}" 
+                                    alt="current conditions"
+                                    class="img-thumbnail"></img></p>
+        -->
+    </div>                                
+</div>
+
+$http.get('https://ionic-in-action-api.herokuapp.com/weather').success(function (weather) {
+    $scope.weather = weather;
+    $ionicLoading.hide();
+  }).error(function (err) {
+    $ionicLoading.show({
+      template: 'Could not load weather. Please try again later.',
+      duration: 3000
+    });
+  });

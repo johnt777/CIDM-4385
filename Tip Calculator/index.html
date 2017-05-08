@@ -1,0 +1,56 @@
+<html ng-app="tipCalcApp">
+    <head>
+        <title> Tip Calc </title>
+         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+          <link href="bootstrap-darkly.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" href="site.css" />
+         <script>
+             angular.module('tipCalcApp', [])
+
+            .controller("TipController", ['$scope', function ($scope) {    
+                $scope.total = 0;
+                $scope.onCalc = function() {
+                $scope.total = $scope.cost * (1 + $scope.tip/100);
+            };
+            $scope.onClear = function() {
+                $scope.total = 0;
+                $scope.cost = '';
+                $scope.tip = '';
+            };
+        }]);
+         </script>
+    </head>
+    <body>
+         <nav class="navbar navbar-default">
+             <h1>Tip Calculator</h1>
+         </nav>
+        <div class="jumbotron"  ng-controller="TipController">
+          
+        <div>
+          <input type="text" name="" class="cost-field" ng-model="cost" placeholder='$ Meal Cost'/>
+ 
+          <input type="text" class="tip-field" name="" ng-model="tip" placeholder='Tip %'/>
+        </div>
+    
+        <div>
+          <button class="clear btn btn-success" ng-click="onClear()"><strong>Clear</strong></button>
+
+          <button class="calculate btn btn-success" ng-click="onCalc()"><strong>Calculate</strong></button>
+        </div>
+
+        <div ng-if="cost || tip" class="receipt">
+        <hr />
+        <div ng-if="cost">
+            <span class="text-decoration">$</span> 
+            <span class="numbers">{{ cost | currency : "" }} </span>
+        </div>
+        <div class="alert alert-dismissible alert-info" ng-if="tip && cost">
+            <span class="text-decoration">+</span> 
+            <span class="numbers">{{ cost* tip/100 | currency : "" }}</span>
+        </div>
+        <hr />
+        <div class="alert alert-dismissible alert-warning">
+        <h3 ng-if="total">{{total | currency}}</h3>
+        </div>
+    </body>
+</html>

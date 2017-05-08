@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="Pizza_App">
+  <head>
+    <!-- this example was consulted: http://embed.plnkr.co/ThpFwX7BRhRhNWPuq5ap/preview -->
+    <title>Local Storage Demo</title>
+    <meta charset="utf-8" />
+  </head>
+  <body ng-controller="MainController as mc">
+    <nav class="navbar navbar-default">
+    <div class="navbar-header">
+    <h1>Topping Selector</h1>
+    </div>
+    </nav>
+    <div class="panel panel-success">
+    <div class="panel-heading">
+    <h3 class="panel-title">List of Your Favourite Pizza Toppings</h3>
+    </div>
+    <ul ng-if="mc.toppings != null">
+      <li ng-repeat="topping in mc.toppings" 
+		  ng-mouseenter="mc.emphasis(true, $event)" 
+		  ng-mouseleave="mc.emphasis(false, $event)"
+		  ng-class="mc.background"
+		  id="topping{{$index}}">
+		  
+		<!-- NOTE: the property names are not the same as the bound variables -->
+        {{topping.name}} ({{topping.year}})
+		[<label for="remove">Remove</label>
+		<input name=remove" type="checkbox"  ng-click="mc.remove($index)">]
+      </li>
+    </ul>
+    </div>
+    <div class="panel panel-primary">
+    <div class="panel-heading">
+    <h3 class="panel-title">Topping Entries</h3>
+    </div>
+    <span class="label label-primary"><label for="toppingName">Enter Your Topping</label></span>
+    <input name="toppingName" type="text" ng-model="mc.toppingName" />
+    <br />
+    <br />
+    <span class="label label-primary"><label for="toppingSize">Extra or Regular</label></span>
+    <input name="toppingSize" type="text" ng-model="mc.toppingSize" />
+    <br />
+    <br />
+    </div>
+    <input type="button" class="btn btn-primary btn-lg" value="UPDATE LIST" ng-click="mc.update(mc.toppingName, mc.toppingSize)" /> 
+    <script src="https://code.angularjs.org/1.6.2/angular.min.js"></script> 
+    <script src="app.js"></script>
+    <link href="bootstrap-darkly.css" rel="stylesheet" type="text/css" />
+  </body>
+</html>
